@@ -1,0 +1,74 @@
+{
+  "tasks": {
+    "build": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/tsconfig-build-common.json",
+        "!test*/**",
+        "!scripts/**",
+        "!tsconfig.json"
+      ],
+      "outputs": ["dist/**", "lambda-dist/**", "!lambda-dist/build.zip"],
+      "dependsOn": ["setup-dev"]
+    },
+    "setup-dev": {
+      "inputs": ["package.json"],
+      "dependsOn": ["^build", "compile"]
+    },
+    "typecheck": {
+      "inputs": ["$TURBO_DEFAULT$", "$TURBO_ROOT$/tsconfig-common.json", "!tsconfig.build.json"],
+      "dependsOn": ["setup-dev"]
+    },
+    "compile": {
+      "inputs": ["hardhat.config.ts", "contracts/**"],
+      "outputs": ["typechain-types/**", "artifacts/**", "cache/**"]
+    },
+    "lint": {
+      "inputs": ["./**.{js,ts}", "$TURBO_ROOT$/eslint.config.ts"],
+      "dependsOn": ["setup-dev"]
+    },
+    "lint:fix": {
+      "cache": false,
+      "dependsOn": ["setup-dev"]
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": ["setup-dev"],
+      "passThroughEnv": ["GH_AUTH_TOKEN"]
+    },
+    "bundle": {
+      "inputs": ["dist/**", "$TURBO_ROOT$/rollup-config.mjs"],
+      "outputs": ["dist/index.js"],
+      "dependsOn": ["build"]
+    },
+    "zip": {
+      "cache": false,
+      "dependsOn": ["build"]
+    },
+    "pushDev": {
+      "cache": false,
+      "dependsOn": ["zip"],
+      "passThroughEnv": [
+        "AWS_PROFILE",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_SESSION_TOKEN",
+        "AWS_REGION"
+      ]
+    },
+    "pushProd": {
+      "cache": false,
+      "dependsOn": ["zip"],
+      "passThroughEnv": [
+        "AWS_PROFILE",
+        "AWS_ACCESS_KEY_ID",
+        "AWS_SECRET_ACCESS_KEY",
+        "AWS_SESSION_TOKEN",
+        "AWS_REGION"
+      ]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "test": {
+      "env": ["DISABLED_NETWORKS"]
+    },
+    "bundle": {
+      "inputs": ["dist/**"],
+      "outputs": ["dist/index.js", "dist/relayer-worker.js"],
+      "dependsOn": ["build"]
+    }
+  }
+}

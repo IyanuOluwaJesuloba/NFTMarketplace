@@ -1,0 +1,32 @@
+module Deploy where
+
+import Daml.Script
+import DA.List
+import DA.Map as M
+import RedStoneAdapter
+import RedStonePriceFeed
+import Input
+
+main : Input -> Script ()
+main input = script do
+  let owner = input.owner  
+  let updater = input.updater  
+  let viewer = input.viewer   
+
+  adapterCid <- submit (actAs [owner] <> readAs [updater, viewer]) do
+    createCmd RedStoneAdapter with
+      adapterId = "RedStoneAdapter-456"
+      owner = owner
+      updaters = [updater]
+      viewers = [viewer]
+      feedData = M.empty
+
+  feedCid <- submit (actAs [owner] <> readAs [viewer]) do
+    createCmd RedStonePriceFeed with
+      adapterId = "RedStoneAdapter-456"
+      owner = owner
+      viewers = [viewer]
+      feedId = head input.feedIds
+      description = "XXX"
+  
+  return ()
