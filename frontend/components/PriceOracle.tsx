@@ -26,11 +26,11 @@ export default function PriceOracle() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-primary-600 to-primary-800 text-white rounded-lg p-6 shadow-lg">
+    <div className="bg-gradient-to-r from-army-green-700 via-army-green-600 to-army-green-800 text-white rounded-lg p-6 shadow-lg border-l-4 border-army-green-400">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="w-5 h-5" />
+            <TrendingUp className="w-5 h-5 text-army-green-100" />
             <h3 className="text-lg font-semibold">Live ETH/USD Price</h3>
           </div>
           <p className="text-sm opacity-90">Powered by RedStone Oracle</p>

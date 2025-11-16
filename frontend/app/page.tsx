@@ -452,7 +452,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gradient-to-b from-army-green-50 to-army-green-100">
       <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -471,16 +471,16 @@ export default function Home() {
         </div>
 
         {/* Minted NFTs */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-12">
+        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-6 mb-12">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold flex items-center gap-2">
-              <ImageIcon className="w-8 h-8" />
+            <h2 className="text-3xl font-bold flex items-center gap-2 text-army-green-900">
+              <ImageIcon className="w-8 h-8 text-army-green-700" />
               Minted NFTs
             </h2>
             <button
               onClick={fetchMintedNFTs}
               disabled={mintedRefreshing}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 disabled:opacity-50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
             >
               <RefreshCw className={`w-4 h-4 ${mintedRefreshing ? 'animate-spin' : ''}`} />
               Refresh
@@ -489,20 +489,20 @@ export default function Home() {
 
           {mintedLoading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-              <p className="mt-4 text-gray-600">Loading minted NFTs...</p>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-army-green-600"></div>
+              <p className="mt-4 text-army-green-700">Loading minted NFTs...</p>
             </div>
           ) : mintedNFTs.length === 0 ? (
             <div className="text-center py-12">
-              <ImageIcon className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-600 text-lg">No NFTs minted yet</p>
-              <p className="text-gray-500 text-sm mt-2">Mint an NFT to see it appear here.</p>
+              <ImageIcon className="w-16 h-16 text-army-green-300 mx-auto mb-4" />
+              <p className="text-army-green-800 text-lg">No NFTs minted yet</p>
+              <p className="text-army-green-700 text-sm mt-2">Mint an NFT to see it appear here.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {mintedNFTs.map((nft) => (
-                <div key={nft.tokenId} className="bg-gray-50 border border-gray-200 rounded-lg p-4 shadow-sm">
-                  <div className="aspect-square bg-gray-100 rounded-md flex items-center justify-center overflow-hidden">
+                <div key={nft.tokenId} className="bg-white/90 border-2 border-army-green-100 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="aspect-square bg-army-green-50 rounded-md flex items-center justify-center overflow-hidden">
                     {nft.metadataStatus === 'loaded' && nft.metadata?.image ? (
                       <img
                         src={nft.metadata.image}
@@ -510,30 +510,30 @@ export default function Home() {
                         className="w-full h-full object-cover"
                       />
                     ) : nft.metadataStatus === 'loading' ? (
-                      <Loader2 className="w-8 h-8 text-gray-400 animate-spin" />
+                      <Loader2 className="w-8 h-8 text-army-green-400 animate-spin" />
                     ) : (
-                      <ImageIcon className="w-10 h-10 text-gray-300" />
+                      <ImageIcon className="w-10 h-10 text-army-green-300" />
                     )}
                   </div>
                   <div className="mt-4 space-y-3">
                     <div>
-                      <p className="text-sm text-gray-500">Token ID</p>
-                      <p className="font-semibold">#{nft.tokenId}</p>
+                      <p className="text-sm text-army-green-600 font-semibold">Token ID</p>
+                      <p className="font-semibold text-army-green-900">#{nft.tokenId}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-500">Owner</p>
-                      <p className="font-mono text-xs break-all">{nft.owner}</p>
+                      <p className="text-sm text-army-green-600 font-semibold">Owner</p>
+                      <p className="font-mono text-xs break-all text-army-green-900">{nft.owner}</p>
                     </div>
                     {nft.metadataStatus === 'loaded' && nft.metadata?.metadataUrl && (
                       <div>
-                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                        <p className="text-xs uppercase tracking-wide text-army-green-600 mb-1 font-semibold">
                           Metadata (Gateway)
                         </p>
                         <a
                           href={nft.metadata.metadataUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-primary-600 break-all hover:underline"
+                          className="text-xs text-army-green-700 break-all hover:underline"
                         >
                           {nft.metadata.metadataUrl}
                         </a>
@@ -541,14 +541,14 @@ export default function Home() {
                     )}
                     {nft.metadataStatus === 'loaded' && nft.metadata?.image && (
                       <div>
-                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                        <p className="text-xs uppercase tracking-wide text-army-green-600 mb-1 font-semibold">
                           Image (Gateway)
                         </p>
                         <a
                           href={nft.metadata.image}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs text-primary-600 break-all hover:underline"
+                          className="text-xs text-army-green-700 break-all hover:underline"
                         >
                           {nft.metadata.image}
                         </a>
@@ -556,14 +556,14 @@ export default function Home() {
                     )}
                     {nft.metadataStatus === 'loaded' && nft.metadata?.name && (
                       <div>
-                        <p className="text-sm text-gray-500">Name</p>
-                        <p className="font-medium">
+                        <p className="text-sm text-army-green-600 font-semibold">Name</p>
+                        <p className="font-medium text-army-green-900">
                           {formatNameWithTokenId(nft.metadata?.name, nft.tokenId)}
                         </p>
                       </div>
                     )}
                     {nft.metadataStatus === 'loaded' && nft.metadata?.description && (
-                      <p className="text-sm text-gray-600">{nft.metadata.description}</p>
+                      <p className="text-sm text-army-green-700">{nft.metadata.description}</p>
                     )}
                     {nft.metadataStatus === 'error' && (
                       <div className="flex items-center gap-2 text-sm text-red-600">
@@ -582,16 +582,16 @@ export default function Home() {
         </div>
 
         {/* Marketplace */}
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold flex items-center gap-2">
-              <Store className="w-8 h-8" />
+            <h2 className="text-3xl font-bold flex items-center gap-2 text-army-green-900">
+              <Store className="w-8 h-8 text-army-green-700" />
               Marketplace
             </h2>
             <button
               onClick={fetchListings}
               disabled={refreshing}
-              className="flex items-center gap-2 px-4 py-2 bg-primary-100 text-primary-700 rounded-lg hover:bg-primary-200 disabled:opacity-50 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
             >
               <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
               Refresh
@@ -600,14 +600,14 @@ export default function Home() {
 
           {loading ? (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
-              <p className="mt-4 text-gray-600">Loading listings...</p>
+              <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-army-green-600"></div>
+              <p className="mt-4 text-army-green-700">Loading listings...</p>
             </div>
           ) : listings.length === 0 ? (
             <div className="text-center py-12">
-              <Store className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-600 text-lg">No active listings yet</p>
-              <p className="text-gray-500 text-sm mt-2">Mint and list your first NFT to get started!</p>
+              <Store className="w-16 h-16 text-army-green-300 mx-auto mb-4" />
+              <p className="text-army-green-800 text-lg">No active listings yet</p>
+              <p className="text-army-green-700 text-sm mt-2">Mint and list your first NFT to get started!</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -99,7 +99,14 @@ contract NFTMarketplace is ReentrancyGuard, Ownable, PriceConsumer {
             active: true
         });
 
-        uint256 priceInUSD = getUSDPrice(priceInWei);
+        // Try to get USD price, but don't fail if RedStone data is not available
+        uint256 priceInUSD = 0;
+        try this.getUSDPrice(priceInWei) returns (uint256 usdPrice) {
+            priceInUSD = usdPrice;
+        } catch {
+            // Price data not available, emit with 0 USD price
+            priceInUSD = 0;
+        }
 
         emit NFTListed(
             listingId,

@@ -67,7 +67,7 @@ export default function ListNFT({ onListSuccess }: { onListSuccess?: () => void 
             toast.success('Marketplace approved!');
           }
 
-          // Use marketplace contract directly without RedStone for now
+          // Create marketplace contract with RedStone wrapper
           console.log("Creating marketplace contract with address:", marketplaceAddress);
           console.log("Signer:", signer);
           
@@ -83,14 +83,21 @@ export default function ListNFT({ onListSuccess }: { onListSuccess?: () => void 
           toast.loading('Listing NFT...');
           const priceInWei = ethers.parseEther(price);
           
-          // The current contract requires RedStone price data in calldata
-          // For now, we'll provide a clear error message
-          console.error("Contract requires RedStone price data in transaction calldata");
-          throw new Error("Listing temporarily disabled: The marketplace contract requires price oracle data that is currently unavailable. Please try again later or contact support.");
+          console.log("Calling listNFT with:", {
+            nftContract: NFT_CONTRACT_ADDRESS,
+            tokenId,
+            priceInWei: priceInWei.toString()
+          });
+          
+          const listTx = await marketplace.listNFT(NFT_CONTRACT_ADDRESS, tokenId, priceInWei);
+          console.log("Transaction sent:", listTx.hash);
+          await listTx.wait();
+          console.log("Transaction confirmed");
 
           toast.success('NFT listed successfully!');
           setTokenId('');
           setPrice('');
+          if (onListSuccess) onListSuccess();
         } catch (error: any) {
           console.error('Error listing NFT:', error);
           toast.error(error.message || 'Failed to list NFT');
@@ -109,14 +116,14 @@ export default function ListNFT({ onListSuccess }: { onListSuccess?: () => void 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
-        <Tag className="w-6 h-6" />
+    <div className="bg-white rounded-lg shadow-lg p-6 border-t-4 border-army-green-600">
+      <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-army-green-900">
+        <Tag className="w-6 h-6 text-army-green-700" />
         List NFT for Sale
       </h2>
       <form onSubmit={handleList} className="space-y-4">
         <div>
-          <label htmlFor="tokenId" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="tokenId" className="block text-sm font-medium text-army-green-700 mb-2">
             Token ID
           </label>
           <input
@@ -125,12 +132,12 @@ export default function ListNFT({ onListSuccess }: { onListSuccess?: () => void 
             value={tokenId}
             onChange={(e) => setTokenId(e.target.value)}
             placeholder="1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-2 border-2 border-army-green-200 rounded-lg focus:ring-2 focus:ring-army-green-500 focus:border-transparent"
             disabled={isListing}
           />
         </div>
         <div>
-          <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="price" className="block text-sm font-medium text-army-green-700 mb-2">
             Price (ETH)
           </label>
           <input
@@ -139,14 +146,14 @@ export default function ListNFT({ onListSuccess }: { onListSuccess?: () => void 
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="0.1"
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+            className="w-full px-4 py-2 border-2 border-army-green-200 rounded-lg focus:ring-2 focus:ring-army-green-500 focus:border-transparent"
             disabled={isListing}
           />
         </div>
         <button
           type="submit"
           disabled={isListing || !account}
-          className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+          className="w-full bg-army-green-700 text-white py-3 px-4 rounded-lg font-medium hover:bg-army-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
         >
           {isListing ? 'Listing...' : 'List NFT'}
         </button>

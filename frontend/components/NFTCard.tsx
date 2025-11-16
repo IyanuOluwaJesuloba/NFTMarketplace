@@ -100,8 +100,8 @@ export default function NFTCard({
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-      <div className="bg-gradient-to-br from-primary-500 to-primary-700 h-48 flex items-center justify-center">
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow border-l-4 border-army-green-600">
+      <div className="bg-gradient-to-br from-army-green-600 to-army-green-800 h-48 flex items-center justify-center">
         <div className="text-white text-center">
           <p className="text-sm opacity-80">Token ID</p>
           <p className="text-4xl font-bold">#{tokenId}</p>
@@ -110,22 +110,22 @@ export default function NFTCard({
       
       <div className="p-6">
         <div className="mb-4">
-          <p className="text-xs text-gray-500 mb-1">Seller</p>
-          <p className="text-sm font-mono truncate">{seller}</p>
+          <p className="text-xs text-army-green-600 mb-1 font-semibold">Seller</p>
+          <p className="text-sm font-mono truncate text-gray-700">{seller}</p>
         </div>
 
         <div className="space-y-2 mb-4">
-          <div className="flex items-center justify-between bg-gray-50 p-3 rounded-lg">
-            <span className="text-sm text-gray-600">ETH Price</span>
-            <span className="text-lg font-bold text-gray-900">{priceETH} ETH</span>
+          <div className="flex items-center justify-between bg-army-green-50 p-3 rounded-lg border border-army-green-200">
+            <span className="text-sm text-army-green-700 font-medium">ETH Price</span>
+            <span className="text-lg font-bold text-army-green-900">{priceETH} ETH</span>
           </div>
           
-          <div className="flex items-center justify-between bg-green-50 p-3 rounded-lg">
-            <span className="text-sm text-green-600 flex items-center gap-1">
+          <div className="flex items-center justify-between bg-army-green-100 p-3 rounded-lg border border-army-green-300">
+            <span className="text-sm text-army-green-800 flex items-center gap-1 font-medium">
               <DollarSign className="w-4 h-4" />
               USD Price
             </span>
-            <span className="text-lg font-bold text-green-700">${priceUSDFormatted}</span>
+            <span className="text-lg font-bold text-army-green-900">${priceUSDFormatted}</span>
           </div>
         </div>
 
@@ -142,7 +142,7 @@ export default function NFTCard({
           <button
             onClick={handleBuy}
             disabled={isProcessing}
-            className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+            className="w-full bg-army-green-700 text-white py-3 px-4 rounded-lg font-medium hover:bg-army-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
           >
             <ShoppingCart className="w-5 h-5" />
             {isProcessing ? 'Processing...' : 'Buy Now'}
