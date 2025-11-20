@@ -471,16 +471,16 @@ export default function Home() {
         </div>
 
         {/* Minted NFTs */}
-        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-6 mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold flex items-center gap-2 text-army-green-900">
+        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-4 sm:p-6 mb-12">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6 text-center md:text-left">
+            <h2 className="text-3xl font-bold flex items-center gap-2 justify-center md:justify-start text-army-green-900">
               <ImageIcon className="w-8 h-8 text-army-green-700" />
               Minted NFTs
             </h2>
             <button
               onClick={fetchMintedNFTs}
               disabled={mintedRefreshing}
-              className="flex items-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
             >
               <RefreshCw className={`w-4 h-4 ${mintedRefreshing ? 'animate-spin' : ''}`} />
               Refresh
@@ -499,7 +499,7 @@ export default function Home() {
               <p className="text-army-green-700 text-sm mt-2">Mint an NFT to see it appear here.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {mintedNFTs.map((nft) => (
                 <div key={nft.tokenId} className="bg-white/90 border-2 border-army-green-100 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
                   <div className="aspect-square bg-army-green-50 rounded-md flex items-center justify-center overflow-hidden">
@@ -582,16 +582,16 @@ export default function Home() {
         </div>
 
         {/* Marketplace */}
-        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold flex items-center gap-2 text-army-green-900">
+        <div className="bg-white/95 border-2 border-army-green-200 rounded-lg shadow-lg p-4 sm:p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-6 text-center md:text-left">
+            <h2 className="text-3xl font-bold flex items-center gap-2 justify-center md:justify-start text-army-green-900">
               <Store className="w-8 h-8 text-army-green-700" />
               Marketplace
             </h2>
             <button
               onClick={fetchListings}
               disabled={refreshing}
-              className="flex items-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-army-green-100 text-army-green-700 rounded-lg hover:bg-army-green-200 disabled:opacity-50 transition-colors"
             >
               <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
               Refresh
@@ -610,7 +610,7 @@ export default function Home() {
               <p className="text-army-green-700 text-sm mt-2">Mint and list your first NFT to get started!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {listings.map((listing) => (
                 <NFTCard
                   key={listing.listingId}

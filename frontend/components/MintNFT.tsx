@@ -56,8 +56,8 @@ export default function MintNFT({ onMintSuccess }: { onMintSuccess?: () => void 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 border-t-4 border-army-green-600">
-      <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-army-green-900">
+    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 border-t-4 border-army-green-600">
+      <h2 className="text-2xl font-bold mb-4 flex flex-wrap items-center gap-2 text-army-green-900">
         <Upload className="w-6 h-6 text-army-green-700" />
         Mint New NFT
       </h2>
